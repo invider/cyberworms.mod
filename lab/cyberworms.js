@@ -20,9 +20,9 @@
 
 // colors
 let base = hsl(.1, 0, 0)
-let content = hsl(.54, 1, .5)     // blue
+let content = hsl(.54, 1, .5)       // blue
 // let content = hsl(.28, 1, .5)    // green
-//let content = hsl(.999, 1, .55)     // red
+//let content = hsl(.999, 1, .55)   // red
 //let content = hsl(.1, 1, .5)      // collider orange
 let contentErr = hsl(.05, 1, .5)    // error red
 let fadeBase = hsl(.1, 0, 0)
@@ -91,6 +91,17 @@ const MAX_ANGLE = PI/2
 const worms = []
 const targets = []
 
+function init() {
+    if (env.config.worms) {
+        const cfg = env[env.config.worms]
+        if (isObj(cfg)) {
+            augment(this, cfg)
+            if (cfg.label) label = cfg.label
+            if (cfg.content) content = cfg.content
+        }
+    }
+}
+
 function evoWorm(dt) {
     let activeSegments = 0
     this.sg.forEach(segment => {
@@ -107,33 +118,6 @@ function drawWorm() {
 }
 
 let outerRingWorms = 0
-
-/*
-function showPoweredBy(s) {
-    const len = rnd(BASE*.05, BASE*.2)
-
-    const line = spawnLineSegment(s.worm,
-        x, y + R1,
-        x, y + R3,
-        function(t) {
-            const pwrd = spawnTextSegment(t.worm,
-                t.x2, t.y2 + BASE * .02,
-                0, POWERED_BY)
-            pwrd.font = poweredByFont
-            pwrd.state = STABLE
-        }
-    )
-    line.targetTime *= 2
-
-    const sh = BASE*.02
-
-    const l2 = spawnLineSegment(s.worm, x-sh,  y+R1, x-sh, y + R3)
-    l2.targetTime *= 3
-
-    const l3 = spawnLineSegment(s.worm, x+sh, y+R1, x+sh, y + R3)
-    l3.targetTime *= 3
-}
-*/
 
 function spawnTextSegment(worm, x, y, dir, msg, fadein, keep, fadeout) {
     const sg = {
@@ -550,6 +534,10 @@ function evoBoot(dt) {
     }
 }
 */
+
+function setLabel(l) {
+    label = l
+}
 
 function evoProgress(dt) {
 }
