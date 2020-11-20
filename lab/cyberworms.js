@@ -20,7 +20,8 @@
 
 // colors
 let base = hsl(.1, 0, 0)
-let content = hsl(.54, 1, .5)       // blue
+let content = hsl(.13, 1, .5)
+//let content = hsl(.54, 1, .5)       // blue
 // let content = hsl(.28, 1, .5)    // green
 //let content = hsl(.999, 1, .55)   // red
 //let content = hsl(.1, 1, .5)      // collider orange
@@ -48,7 +49,7 @@ const FBASE = BASE * .035
 // core config
 const R1 = BASE * .1
 const R2 = BASE * .2
-let label = 'PowerUps'
+let label = 'JetPakBoy'
 let labelFont = FBASE+'px moon'
 const STEP = (R2-R1)/10
 const W = BASE * .0025 // line thickness
@@ -217,7 +218,7 @@ function spawnLineSegment(worm, x1, y1, x2, y2, onTarget) {
                 alpha(1 - this.time/FADE)
             }
 
-            const a = lib.math.targetAngle(this.x1, this.y1, this.x2, this.y2)
+            const a = lib.math.bearing(this.x1, this.y1, this.x2, this.y2)
 
             let l = this.length
             if (this.state === ACTIVE) l = this.time/this.targetTime * this.length
